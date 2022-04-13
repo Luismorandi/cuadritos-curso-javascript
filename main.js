@@ -22,12 +22,12 @@ const agregarProducto = () => {
 }; 
 
 
-//lista de productos en el ecommerce
+//lista de productos en el ecommerce. Arrays vacios  que van a ser agregados.
 
-let listaProductos = [];
-let  carritoCompras = [];
+let listaProductos = [];//Son los objetos que van a ser agregados en el eccomerce
+let  carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
 
-// funcion para agregar articulos del ecommerce (listaProductos) al carrito (carritoCompras)
+// funcion para agregar articulos del ecommerce (listaProductos) al carrito (carritoCompras). 
 const agregarCarrito = () => {
 
     i = prompt("Cual articulo quieres agregar?");
@@ -37,18 +37,22 @@ const agregarCarrito = () => {
     }; 
 
  
-// esta variable es el total del precio de todos los carritos
+// esta variable es el total del precio de todo lo que esta dentro del carrito (carritoCompras)
 
-let totalCarrito = carritoCompras.reduce((acumulador, obj) => (acumulador) + (obj.precio), 0); 
+function totalCarrito(){ 
+let totalCarrito = 0
+totalCarrito = carritoCompras.reduce((acumulador, obj) => acumulador + obj.precio, 0 )
+return totalCarrito}
+    
+
 
 // funcion para "comprar". Lo que hace es dejar el carritoCompras en 0
-function comprar(){
+/* function comprar(){
     if (carritoCompras[0].id == listaProductos[0].id){
     
         listaProductos[0].cantidad = listaProductos[0].cantidad - 1 }
   
     return   carritoCompras = []
-    };
-
+    }; */
 
 
