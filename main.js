@@ -1,3 +1,14 @@
+///********** Seccion = agregar productos al ecommerce ***********/
+
+//variables globales//
+const formulario =  document.querySelector("#formulario");
+const cargar = document.querySelector("#boton");
+let nombre1= document.getElementById("nombre");
+let precio1= document.getElementById("precio");
+let cantidad1 = document.getElementById("cantidad");
+let listaProductos = [];//Son los objetos que van a ser agregados en el eccomerce
+let  carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
+
 // constructor de objetos de cada articulo que se va a agregar al ecommerce
 
 class Producto {
@@ -9,12 +20,14 @@ class Producto {
     }
 } 
 
+
+
 //funcion para agregar producto al ecommerce. Funcionaria para un supuesto empleado que quiera cargar los productos
 
 const agregarProducto = () => {
-    let nombre = prompt("Nombre del producto");
-    let precio = parseFloat(prompt("Cual es el precio?"));
-    let cantidad = parseInt(prompt("Cuanto stocke hay?"));
+    let nombre = document.getElementById("nombre").value   
+    let precio = parseFloat(document.getElementById("precio").value);
+    let cantidad = parseInt(document.getElementById("cantidad").value)
     let id =  listaProductos.length;
     let prod = new Producto(nombre,precio, cantidad, id);
     listaProductos.push(prod);
@@ -22,10 +35,35 @@ const agregarProducto = () => {
 }; 
 
 
+
+
+ cargar.onclick = (e) => {
+    if (nombre1.value == 0) {
+        alert("Tienes que ingresar el nombre del producto")
+    }
+
+    else if (precio1.value == 0) {
+        alert("Tienes que ingresar el precio del producto")
+    }
+
+    else if (cantidad.value == 0) {
+        alert("Tienes que ingresar la cantidad que ingresará al stock")
+    }
+    else {
+        
+        e.preventDefault();
+        agregarProducto();
+        alert(`${nombre1.value} fue agregado al stock de la tienda. Gracias!`);
+        document.getElementById("formulario").reset() 
+    
+    }
+    } 
+
+
 //lista de productos en el ecommerce. Arrays vacios  que van a ser agregados.
 
-let listaProductos = [];//Son los objetos que van a ser agregados en el eccomerce
-let  carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
+
+///********** Seccion = agregar productos al ecommerce ***********/
 
 // funcion para agregar articulos del ecommerce (listaProductos) al carrito (carritoCompras). 
 const agregarCarrito = () => {
