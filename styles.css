@@ -5,11 +5,13 @@
 }
 
 
-#sectionProductos{
-    width: 80%  ;
-    float: right;
+.sectionProductos{
+    width: 100%  ;
     padding-left: 10%;
+    padding-top: 2.5%;
     
+
+
 }
 
 
@@ -414,6 +416,14 @@ form{
     color: #ff523b;
 }
 
+
+.inputBuscador{
+    width: 80%;
+}
+
+input, textarea{
+    color: rgb(83, 83, 83)
+}
 
 
 

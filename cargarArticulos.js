@@ -47,19 +47,19 @@ return prod;
 
 cargarProducto.onclick = (e) => {
 if (nombre.value == 0) {
-    //alert("Tienes que ingresar el nombre del producto")
+
     e.preventDefault()
     swal("Tienes que ingresar el nombre del producto");
 }
 
 else if (precio.value == 0) {
-  // alert("Tienes que ingresar el precio del producto")
+
   e.preventDefault()
   swal("Tienes que ingresar el precio del producto");
 }
 
 else if (cantidad.value == 0) {
-   //alert("Tienes que ingresar la cantidad que ingresará al stock")
+
    e.preventDefault()
    return swal("Tienes que ingresar las unidades que ingresaran al stock");
 }
@@ -67,22 +67,12 @@ else {
     
     e.preventDefault();
     agregarProducto();
-    //alert(`${nombre.value} fue agregado al stock de la tienda. Gracias!`);
+
     swal("Excelente", `${nombre.value} fue agregado al stock de la tienda`, "success");
-    //una vez la persona agrega el producto se le asigna el ID que es igual al numero ultimo del array = listaProductos[listaProductos.length -1 ].id
+
     document.getElementById("formulario").reset() 
     
 }}
-
-//imprimir productos agregados en el HTML
-
-
-
-
-//funcion agregar al carrito: lo que hace es agregar al array carritoCompras + imprimir el articulo en el carrito del html. prodID seria el id que se le asigno anteriormente en el array = listaProductos[listaProductos.length -1 ].id
-
-
-/// funcion parainsertar el articulo en el html para que se pueda ver en el carrito desplegable
 function  insertarCarrito (carritoCompras) {
 tr= document.createElement("tr")
 tr.setAttribute(`id`, `id.${carritoCompras.id}`)
@@ -99,10 +89,7 @@ tr.innerHTML =
 document.getElementById("thread").appendChild(tr);
 }
 
-//elimina los carritos tanto del HTML como del array carritoCompras
 
-
-//Calcula el valor total del carrito de compras y lo imprime en el html
 
 
 function totalCarrito(){ 
@@ -115,10 +102,7 @@ function totalCarrito(){
 
     } ;
 
-//las funciones que vienen a continuacion las hice para los articulos que ya estan en el html por default. Por una mera demostracion del sitio las deje. Si fuera un sitio 
-//podria luego agregarlas y dejarlas en el localStorage
 
-//agregarCarrito1 hace lo mismo que  agregarCarrito1, solo que para los articulo ya en el HTML
 
 
 

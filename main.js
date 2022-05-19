@@ -27,7 +27,8 @@ let carritoCompras = []; // son los objetos que van a ser agregados al carritos 
 localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 listaProductos = JSON.parse(localStorage.getItem(`productos`));
 localStorage.getItem(`productosCarrito`) === null ? carritoCompras = [] : carritoCompras = JSON.parse(localStorage.getItem(`productosCarrito`));
- listaProductos.forEach(listaProductos=> {
+ 
+listaProductos.forEach(listaProductos=> {
     agregarCard(listaProductos)
 
 }); 
@@ -157,4 +158,43 @@ function guardarLocalStorageProductos(producto){
 }
 
 
+///////////////////////////////////////
+
+const buscador = document.getElementById("buscador");
+const botonBuscador = document.getElementById("botonBuscador")
+const sectionProductos = document.getElementById("sectionProductos")
+
+
+const searchFilter = () => {
+  /*   console.log(buscador.value) */
+
+  let textoBuscador = buscador.value.toLowerCase()
+  if(textoBuscador === "" ){
+      sectionProductos.innerHTML = `
+      `
+    listaProductos.forEach(listaProductos=> {
+        agregarCard(listaProductos)
+    
+    }); 
+
+  }
+  
+  else{ 
+    sectionProductos.innerHTML = `
+          
+    `
+  for (let producto of listaProductos){
+      let nombre1= producto.nombre.toLowerCase();
+      if(nombre1.indexOf(textoBuscador) !== -1){
+
+          
+        agregarCard(producto)
+
+      }
+
+  }
+}
+}
+botonBuscador.addEventListener("click", searchFilter);
+buscador.addEventListener("keyup", searchFilter)
 

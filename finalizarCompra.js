@@ -170,7 +170,6 @@ const totalBitcoin = () => {
     fetch("https://blockchain.info/ticker")
     .then(response => response.json())
     .then((result) => {
-        
         th1.innerHTML +=`
         <td> ${(JSON.parse(localStorage.getItem(`totalCarrito`)) /(result.ARS.last) )}<td/>`
 
