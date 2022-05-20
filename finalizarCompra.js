@@ -146,22 +146,39 @@ function eliminarCarritoCompras(){
     location.reload();
 
     }
+    function restarStock() {
 
+        for (producto of carritoCompras){
+            let objeto= listaProductos.find((obj) =>    producto.id === obj.id);
+            let indice = listaProductos.indexOf(objeto)
+            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precio: parseInt(`${objeto.precio}`), cantidad: parseInt(`${objeto.cantidad -1}`), id: parseInt(`${objeto.id}`)})
+            localStorage.setItem(`productos`, JSON.stringify(listaProductos));
+
+            
+    }}
+
+    
+
+           
+
+
+  
 
    function  comprarCarritoCompras ()
    {
+       restarStock();
         carritoCompras = [];
         localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
         Swal.fire(
             '¡Exelente!',
             'Tu compra fue realizada con exito. Te llegará el Link de pago a tu mail',
             'success'
-          ).then((result)=> {
+        ).then((result)=> {
               if(result = true){
                 location.reload()}
 
           
-          })}
+              })}
 
 let th1 = document.getElementById("thread234")
 
