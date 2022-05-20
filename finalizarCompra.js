@@ -184,11 +184,12 @@ let th1 = document.getElementById("thread234")
 
 const totalBitcoin = () => {
     
-    fetch("https://blockchain.info/ticker")
+    fetch("https://api.bluelytics.com.ar/v2/latest")
     .then(response => response.json())
     .then((result) => {
+        let resultado =result.blue.value_sell
         th1.innerHTML +=`
-        <td> ${(JSON.parse(localStorage.getItem(`totalCarrito`)) /(result.ARS.last) )}<td/>`
+        <td> ${(JSON.parse(localStorage.getItem(`totalCarrito`)) /(resultado.toFixed(2)))}<td/>`
 
     }
     
