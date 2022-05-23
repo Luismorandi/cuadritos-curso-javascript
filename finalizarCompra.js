@@ -4,7 +4,7 @@
 //variables globales//
 const formulario =  document.querySelector("#formulario");
 const cargarProducto = document.querySelector("#botonAgregarProducto");
-localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
+localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
 let carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
 localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 listaProductos = JSON.parse(localStorage.getItem(`productos`));
@@ -147,14 +147,22 @@ function eliminarCarritoCompras(){
 
     }
     function restarStock() {
-
         for (producto of carritoCompras){
             let objeto= listaProductos.find((obj) =>    producto.id === obj.id);
             let indice = listaProductos.indexOf(objeto)
-            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precio: parseInt(`${objeto.precio}`), cantidad: parseInt(`${objeto.cantidad -1}`), id: parseInt(`${objeto.id}`)})
+            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precio: parseInt(`${objeto.precio}`), cantidad: parseInt(`${objeto.cantidad -1}`), cantidadPrecio: parseInt(`${objeto.cantidadPrecio}`),  id: parseInt(`${objeto.id}`)})
+            localStorage.setItem(`productos`, JSON.stringify(listaProductos));
+            
+    }}
+
+    function nuevoPrecio() {
+        for (producto of carritoCompras){
+            let objeto= listaProductos.find((obj) =>    producto.id === obj.id);
+            let indice = listaProductos.indexOf(objeto)
+            let nuevoPrecio = (((100- ((objeto.cantidad *100) / objeto.cantidadPrecio )) /100) +1 )  *  objeto.precio;
+            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precio: parseInt(`${nuevoPrecio}`), cantidad: parseInt(`${objeto.cantidad}`), cantidadPrecio: parseInt(`${objeto.cantidadPrecio}`),  id: parseInt(`${objeto.id}`)})
             localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 
-            
     }}
 
     
@@ -166,7 +174,9 @@ function eliminarCarritoCompras(){
 
    function  comprarCarritoCompras ()
    {
+       
        restarStock();
+       nuevoPrecio();
         carritoCompras = [];
         localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
         Swal.fire(

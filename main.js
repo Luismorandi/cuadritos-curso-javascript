@@ -22,7 +22,7 @@ const agregarCarrito = (prodId) =>{
 //variables globales//
 const formulario =  document.querySelector("#formulario");
 const cargarProducto = document.querySelector("#botonAgregarProducto");
-localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
+localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
 let carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
 localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 listaProductos = JSON.parse(localStorage.getItem(`productos`));
@@ -54,10 +54,11 @@ document.body.onload = totalCarrito()
  function agregarCard (obj){
     let nodo = document.createElement("div");
     nodo.className = "content";
-    nodo.innerHTML = `   <img src="./img/Cuadro1.PNG" alt="" class="imagenesEco">
+    nodo.innerHTML = `   
+    <img src="./img/Cuadro1.PNG" alt="" class="imagenesEco">
     <h3 class="ache3">${obj.nombre}</h3>
-    <p class="parrafoEco"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dolores eaque dolor ex, neque culpa nobis perferendis mollitia consequuntur animi tenetur corrupti at recusandae, fuga voluptas magni ipsum laudantium est?</p>
-    <h6 class="ache6">${obj.precio}</h6>
+    <span class="cantidadUnidades"> Está subiendo su valor <b> ¡Quedan solo ${obj.cantidad} unidades!</b> &#128293;</span>
+    <h6 class="ache6" >  <del>$${obj.precio} </del>| $${obj.precio}  </h6>
     <button class="buy-4 buttonCard" id= "${obj.id}" onclick="agregarCarrito(${obj.id})" > Agregar carrito</button>`
     document.getElementById("sectionProductos").appendChild(nodo);
 
@@ -163,6 +164,7 @@ function guardarLocalStorageProductos(producto){
 const buscador = document.getElementById("buscador");
 const botonBuscador = document.getElementById("botonBuscador")
 const sectionProductos = document.getElementById("sectionProductos")
+const sectionProductos1 = document.getElementById("sectionProductos1")
 
 
 const searchFilter = () => {
@@ -187,9 +189,15 @@ const searchFilter = () => {
       let nombre1= producto.nombre.toLowerCase();
       if(nombre1.indexOf(textoBuscador) !== -1){
 
-          
+        sectionProductos.innerHTML = `
+        `
         agregarCard(producto)
 
+      }
+      else {
+        sectionProductos.innerHTML = `
+        <h1 class="sectionProductos1">No se encontro ese cuadro. Intenta con otro nombre :)</h1>
+      `
       }
 
   }

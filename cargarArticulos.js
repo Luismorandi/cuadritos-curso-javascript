@@ -4,7 +4,7 @@
 //variables globales//
 const formulario =  document.querySelector("#formulario");
 const cargarProducto = document.querySelector("#botonAgregarProducto");
-localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
+localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
 let carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
 localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 listaProductos = JSON.parse(localStorage.getItem(`productos`));
@@ -18,10 +18,11 @@ insertarCarrito(carritoCompras)
 
 document.body.onload = totalCarrito()
 class Producto {
-constructor(nombre,precio, cantidad, id) {
+constructor(nombre,precio, cantidad, cantidadPrecio, id) {
     this.nombre = nombre;
     this.precio = precio;
     this.cantidad = cantidad;
+    this.cantidadPrecio = cantidadPrecio;
     this.id =   id ;
 }
 } 
@@ -33,9 +34,10 @@ constructor(nombre,precio, cantidad, id) {
 const agregarProducto = () => {
 let nombre = document.getElementById("nombre").value   
 let precio = parseFloat(document.getElementById("precio").value);
-let cantidad = parseInt(document.getElementById("cantidad").value)
+let cantidad = parseInt(document.getElementById("cantidad").value);
+let cantidadPrecio = cantidad;
 let id =  listaProductos.length;
-let prod = new Producto(nombre,precio, cantidad, id);
+let prod = new Producto(nombre,precio, cantidad, cantidadPrecio, id);
 guardarLocalStorageProductos(prod)
 return prod;
 }; 
