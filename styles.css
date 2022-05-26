@@ -5,13 +5,12 @@
 }
 
 
+
 .sectionProductos{
     width: 100%  ;
     padding-left: 11%;
     padding-top: 2.5%;
     margin-bottom: 45%;
-    
-
 
 }
 
@@ -24,15 +23,25 @@
     padding: 15px;
 }
 .sectionProductos1{
-    width: 100%  ;
+    width: 70%;
     display: flex;
     justify-content: center;
     padding-top: 2.5%;
-    
-
+    padding-left: 30%;
 
 }
 
+
+.paddingBottom{
+    background: rgb(255, 255, 255);
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0, 0,0 ,0.22);
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+    
+}
 
 body{
     font-family: 'Poppins', sans-serif;
@@ -49,20 +58,18 @@ body{
     height: 100vh;
     padding-top: 2%;
 }
-#formArticulos21{
+ #formArticulos21{
+    
     width: 50%  ;
     float: left;
 
-    height: 500px;
-    padding-top: 2%;
-}
-#formArticulos22{
+} 
+ #formArticulos22{
     width: 30%  ;
     float: right;
+    
 
-    height: auto;
-    padding-top: 2%;
-}
+} 
 .navbar{
     display: flex;
     align-items: center;
@@ -160,6 +167,21 @@ p{
     border: none;
     border-radius: 8px;
     transition: background 0.5;
+    width: 100%;
+    cursor: pointer;
+    
+}
+
+.btnLink{
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 30px ;
+    margin: 30px 0;
+    border: none;
+    border-radius: 8px;
+    transition: background 0.5;
+    
     
 }
 
@@ -169,6 +191,21 @@ p{
 .header{
     background: radial-gradient(#fff, #ffd6d6);
 }
+ .background{
+    background: rgb(151, 151, 151);
+} 
+/* .background2{
+
+    padding: 2%;
+} 
+ */
+/* .background3{
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    margin-bottom: 2%;
+    
+
+}  */
 
 
 .header .row{
@@ -190,15 +227,16 @@ p{
 
 .submenu{
     position: relative;
+    
+    
 }
+
 
 .submenu #carritos{
-    display: none;
-    border-radius: 20px;
-}
-
-.submenu:hover #carritos{
-    display: block;
+   display: none;
+    border-radius: 8px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0, 0,0 ,0.22);
     color: black;
     position: absolute;
     right: 0;
@@ -206,6 +244,26 @@ p{
     z-index: 1;
     background: white;
     padding: 20px;
+    
+    
+    
+
+}
+
+#check1{
+    display: none;
+    
+}
+
+#carImg{
+    cursor: pointer;
+    
+}
+
+#check1:checked +  .submenu #carritos{
+display: block;
+    
+    
 
 }
 
@@ -218,26 +276,23 @@ p{
 }
 
 .button{
-    background-color: #ff523b;
-    color:rgb(255, 255, 255);
+    
+    color: white;
     margin-bottom: 1rem;
     display: inline-block;
         height: 38px;
         padding: 0 30px;
-        color: #555;
         text-align: center;
         font-size: 11px;
         font-weight: 600;
         line-height: 38px;
         letter-spacing: .1rem;
         text-transform: uppercase;
-        text-decoration: none;
         white-space: nowrap;
-        background-color: transparent;
-        border-radius: 4px;
-        border: 1px solid #bbb;
+        border-radius: 8px;
         cursor: pointer;
         box-sizing: border-box;
+        background-color: #ff523b;
 }
 
 .u-full-width {
@@ -389,6 +444,9 @@ a:hover {
 
 }
 
+button{
+    border-width: 0;
+}
 .parrafoEco{
     text-align: center;
     color: #b2bec3;
@@ -442,8 +500,6 @@ form{
     padding: 2.3rem 2.2rem;
     z-index: 10;
     overflow: hidden;
-    position: relative;
-
 }
 .inputContainer{
    width: 100%;
@@ -454,18 +510,21 @@ form{
    font-size: 0.95rem;
    letter-spacing: 0.5px;
    border-radius: 8px;
+   border-color: rgb(218, 218, 218);
    transition: 0.3s;
 
 
 }
 .inputContainer1{
     width: 60%;
-    height: 80vh;
+    min-height: 80vh;
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
     margin-left: 20%;
     margin-top: 15%;
+ 
+    
     
  
  
@@ -485,6 +544,18 @@ input, textarea{
     color: rgb(83, 83, 83)
 }
 
+.checkBtn{
+    font-size: 30px;
+    color: #555;
+    float: left;
+    line-height: 80px;
+    display: none;
+    cursor: pointer;
+}
+#check{
+    display: none;
+}
+
 
 
 @media(max-width: 1000px) {
@@ -500,8 +571,69 @@ input, textarea{
         width: 100%;
         
     }
+
+    .checkBtn{
+        display: block;
+    }
+
+     .submenu2{
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+        0 10px 10px rgba(0, 0,0 ,0.22);
+        position: absolute;
+        width: 50%;
+        height: 40vh;
+        background: white;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+        border-radius: 8px;
+    }
+
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+
+    }
+
+    nav ul li a {
+        font-size: 20px;
+    }
+    
+    li a:hover, li a:active{
+        background: none;
+        color: #ff523b;
+    }
+
+    #check:checked+.submenu2{
+        left: 0%;
+    }
+    .sectionProductos{
+        padding-left: 0;
+        padding-right: 5%;
+    }
+    .logo{
+        display: none;
+    }
     .content .cantidadUnidades{
         width: 30%;
+    }
+    .sectionProductos1{
+        width: 90%;
+        padding-left: 10%;
+    }
+
+    .col-2{
+        text-align: center;
+    }
+
+    .footer{
+        text-align: center;
+    }
+
+    .footer-col-1{
+        display: none;
     }
         
     }

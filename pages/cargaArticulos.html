@@ -12,18 +12,27 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;1,400&display=swap"
             rel="stylesheet">
+            <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>    
+        
+            
         <title>cuadritos - eCommerce</title>
         <link rel="stylesheet" href="/styles.css">
     </head>
-    <body>
+    <body class="background"> 
         <div class="">
             <div class="container">
                 <div class="navbar">
+                    <label for="check" class="checkBtn"> <span class="material-symbols-outlined">
+                        menu
+                        </span></label>
                     <div class="logo">
                         <img src="/img/logo98-removebg-preview.png" width="125px">
                     </div>
                     <nav>
-                        <ul>
+                        <input type="checkbox" name="" id="check">
+                        <ul class="submenu2">
                             <li>
                                 <a href="/index.html">Home</a>
                             </li>
@@ -39,11 +48,12 @@
                         </ul>
                     </nav>
                     <div>
+                        <label for="check1" class="checkBtn1"> <img src="../img/cart.png" alt="" width="30px" height="30px"></label>
                         <ul>
+                            <input type="checkbox" name="" id="check1">
                             <li class="submenu">
-                                <img src="/img/cart.png" alt="" width="30px" height="30px">
+                        
                                 <div id="carritos">
-                                    <p class="vacio">Vaciar carrito</p>
                                     <table id="listaCarritos" class="u-full-width">
                                         <thead id="thread">
                                             <tr>
@@ -77,8 +87,8 @@
             </div>
         </div>
 
-    <section id="formArticulos" class="row">
-        <div class="col-2">
+    <section id="formArticulos" class="row ">
+        <div class="col-2 paddingBottom">
 
             <div class="alerts">
                 <h4>Agregar articulos al eCommerce</h3>
