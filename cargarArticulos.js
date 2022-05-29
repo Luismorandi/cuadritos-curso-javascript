@@ -1,10 +1,9 @@
+//VARIABLES GLOBLAES//
 
 
-
-//variables globales//
 const formulario =  document.querySelector("#formulario");
 const cargarProducto = document.querySelector("#botonAgregarProducto");
-localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
+localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precioPrincipal:1500, precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precioPrincipal:2500, precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precioPrincipal:1000, precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4',precioPrincipal:11500, precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
 let carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
 localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 listaProductos = JSON.parse(localStorage.getItem(`productos`));
@@ -16,10 +15,13 @@ insertarCarrito(carritoCompras)
 }); 
 
 
+///CONSTRUCTOR DE OBJETOS////
+
 document.body.onload = totalCarrito()
 class Producto {
-constructor(nombre,precio, cantidad, cantidadPrecio, id) {
+constructor(nombre,precioPrincipal, precio, cantidad, cantidadPrecio, id) {
     this.nombre = nombre;
+    this.precioPrincipal = precioPrincipal;
     this.precio = precio;
     this.cantidad = cantidad;
     this.cantidadPrecio = cantidadPrecio;
@@ -29,23 +31,22 @@ constructor(nombre,precio, cantidad, cantidadPrecio, id) {
 
 
 
-//funcion para agregar producto al ecommerce. Funcionaria para un supuesto empleado que quiera cargar los productos
+//funcion para agregar producto al ecommerce. Funcionaria para un supuesto empleado que quiera cargar los productos//
 
 const agregarProducto = () => {
 let nombre = document.getElementById("nombre").value   
-let precio = parseFloat(document.getElementById("precio").value);
+let precioPrincipal = parseFloat(document.getElementById("precio").value);
+let precio = precioPrincipal
 let cantidad = parseInt(document.getElementById("cantidad").value);
 let cantidadPrecio = cantidad;
 let id =  listaProductos.length;
-let prod = new Producto(nombre,precio, cantidad, cantidadPrecio, id);
+let prod = new Producto(nombre,precioPrincipal, precio, cantidad, cantidadPrecio, id);
 guardarLocalStorageProductos(prod)
 return prod;
 }; 
 
-//Funcion asignada al boton cargar. Una vez la persona llene el formulario lo que hace es:
-//Agrega producto al array listaProductos (agregarProducto). Hace un alert del producto agregado con exito y agrega HTML (agregarCard)para hacer cards del producto en HTML y asigna la funcion 
-//para agregarloposteriormente al carrito de compras.
 
+///FUNCION ONCLICK PARA MENSAJES DE ALERTAS EN EL FORMULARIO DE LA CARGA DE PRODUCTOS // 
 
 cargarProducto.onclick = (e) => {
 if (nombre.value == 0) {
@@ -75,6 +76,9 @@ else {
     document.getElementById("formulario").reset() 
     
 }}
+
+
+//FUNCION PARA IMPRIMIR EN LA SECCION DEL CARRITO ///
 function  insertarCarrito (carritoCompras) {
 tr= document.createElement("tr")
 tr.setAttribute(`id`, `id.${carritoCompras.id}`)
@@ -92,7 +96,7 @@ document.getElementById("thread").appendChild(tr);
 }
 
 
-
+//////////IMPRIME EL TOTAL DEL CARRITO EN LA SECCION CARRITO////////// 
 
 function totalCarrito(){ 
 
@@ -106,7 +110,7 @@ function totalCarrito(){
 
 
 
-
+///////// FUNCION PARA ELIMINAR ARTICULOS DE LA SECCION CARRITOS Y LOS ELIMINA DEL ARRAY "carritoCompras" ///////
 
 
 function eliminarCarrito1 (prodId){
@@ -117,11 +121,14 @@ let item5 = carritoCompras.indexOf(item);
 carritoCompras.splice(item5, 1);
 carritoCompras = localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
 carritoCompras= JSON.parse(localStorage.getItem(`productosCarrito`));
-
+//luego de eliminarlo, hace otra vez la cuenta del total del carrito//
 totalCarrito();
 }
 
-//local y session storage
+/* COMIENZO DE FUNCIONES PARA GUARDAR/ ACTUALIZAR CARRITO DE COMPRAS EN EL STORAGE */
+
+
+//FUNCION PARA GUARDAR EL ARTICULO DE LOS ARTICULOS AL ARRAY CARRITOCOMPRAS AL STORAGE//
 
 function guardarLocalStorage(producto){
 carritoCompras= this.obtenerProductoLocasStorage();
@@ -130,6 +137,7 @@ localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
 
 }
 
+//FUNCION  PARA LEER EL LOCAL STORAGE PARA TENERLO ACTUALIZO EN LA FUNCION ANTERIOR//
 function obtenerProductoLocasStorage(){
 let productosLs;
 localStorage.getItem(`productosCarrito`) === null ? productosLs = [] : productosLs= JSON.parse(localStorage.getItem(`productosCarrito`));
@@ -144,10 +152,12 @@ localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 
 }
 
+//FUNCION PARA VACIAR EL CARRITO DE COMPRAS ///
+
 function eliminarCarritoCompras(){
 carritoCompras = []
 localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
 }
 
-
+/* FIN DE FUNCIONES PARA GUARDAR/ ACTUALIZAR CARRITO DE COMPRAS EN EL STORAGE */
 

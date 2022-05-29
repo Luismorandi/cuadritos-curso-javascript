@@ -1,10 +1,5 @@
-///********** Seccion = agregar productos al ecommerce ***********/
-
-
-//variables globales//
-const formulario =  document.querySelector("#formulario");
-const cargarProducto = document.querySelector("#botonAgregarProducto");
-localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4', precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
+/*-----------------------------------ARRAYS DEL PROYECTO--------------------------------*/
+localStorage.getItem(`productos`) === null ? listaProductos = [{nombre: 'Cuadro 1', precioPrincipal:1500, precio: 1500, cantidad: 10, cantidadPrecio: 10, id: 0},{nombre: 'Cuadro 2', precioPrincipal:2500, precio: 2500, cantidad: 10, cantidadPrecio: 10, id: 1},{nombre: 'Cuadro 3', precioPrincipal:1000, precio: 1000, cantidad: 10, cantidadPrecio: 10, id: 2},{nombre: 'Cuadro 4',precioPrincipal:11500, precio: 11500, cantidad: 10, cantidadPrecio: 10, id: 3}]: listaProductos= JSON.parse(localStorage.getItem(`productos`));
 let carritoCompras = []; // son los objetos que van a ser agregados al carritos desde los objetos del ecommerce (listaProductos)
 localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 listaProductos = JSON.parse(localStorage.getItem(`productos`));
@@ -25,6 +20,7 @@ carritoCompras.forEach(carritoCompras=> {
 document.body.onload = totalCompra()
 document.body.onload = totalCarrito()
 
+
 function totalCompra(){ 
 
     let totalCarritos = 0;
@@ -33,25 +29,24 @@ function totalCompra(){
     th.innerHTML= `$${totalCarritos}`;
     } ;
     
-
-
-
-//Funcion asignada al boton cargar. Una vez la persona llene el formulario lo que hace es:
-//Agrega producto al array listaProductos (agregarProducto). Hace un alert del producto agregado con exito y agrega HTML (agregarCard)para hacer cards del producto en HTML y asigna la funcion 
-//para agregarloposteriormente al carrito de compras.
-
-
-
     
-//imprimir productos agregados en el HTML
+function  comprarCarrito (carritoCompras) {
+    tr= document.createElement("tr")
+    tr.setAttribute(`id`, `id.${carritoCompras.id}`)
+   tr.innerHTML = 
 
+   `<td>
+   <img src="../img/Cuadro1.PNG" width= 100>
+   </td>
+   <td>${carritoCompras.nombre}</td>
+   <td>$${carritoCompras.precio}</td>
+ ` 
+   document.getElementById("thread3").appendChild(tr);
+}
 
+/* -------------------INSERTAR  ARTICULO AL CARRITO ------------------ */
 
-
-//funcion agregar al carrito: lo que hace es agregar al array carritoCompras + imprimir el articulo en el carrito del html. prodID seria el id que se le asigno anteriormente en el array = listaProductos[listaProductos.length -1 ].id
-
-
-/// funcion parainsertar el articulo en el html para que se pueda ver en el carrito desplegable
+///////IMPRIME ARTICULOS AGREGADOS AL CARRITO/////////
 function  insertarCarrito (carritoCompras) {
     tr= document.createElement("tr")
     tr.setAttribute(`id`, `id.${carritoCompras.id}`)
@@ -68,25 +63,7 @@ function  insertarCarrito (carritoCompras) {
    document.getElementById("thread").appendChild(tr);
 }
 
-//elimina los carritos tanto del HTML como del array carritoCompras
-function  comprarCarrito (carritoCompras) {
-    tr= document.createElement("tr")
-    tr.setAttribute(`id`, `id.${carritoCompras.id}`)
-   tr.innerHTML = 
-
-   `<td>
-   <img src="../img/Cuadro1.PNG" width= 100>
-   </td>
-   <td>${carritoCompras.nombre}</td>
-   <td>$${carritoCompras.precio}</td>
- ` 
-   document.getElementById("thread3").appendChild(tr);
-}
-
-//Calcula el valor total del carrito de compras y lo imprime en el html
-
-
-
+//////////IMPRIME EL TOTAL DEL CARRITO EN LA SECCION CARRITO////////// 
 function totalCarrito(){ 
 
     let totalCarritos = 0;
@@ -96,14 +73,9 @@ function totalCarrito(){
     localStorage.setItem(`totalCarrito`, JSON.stringify(totalCarritos));
 
     } ;
-    
-//las funciones que vienen a continuacion las hice para los articulos que ya estan en el html por default. Por una mera demostracion del sitio las deje. Si fuera un sitio 
-//podria luego agregarlas y dejarlas en el localStorage
-
-//agregarCarrito1 hace lo mismo que  agregarCarrito1, solo que para los articulo ya en el HTML
 
 
-
+///////// FUNCION PARA ELIMINAR ARTICULOS DE LA SECCION CARRITOS Y LOS ELIMINA DEL ARRAY "carritoCompras" ///////
 
 function eliminarCarrito1 (prodId){
     let aidi= document.getElementById(`id.${prodId}`);
@@ -113,12 +85,15 @@ function eliminarCarrito1 (prodId){
     carritoCompras.splice(item5, 1);
     carritoCompras = localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
     carritoCompras= JSON.parse(localStorage.getItem(`productosCarrito`));
-
+//luego de eliminarlo, hace otra vez la cuenta del total del carrito//
     totalCarrito();
     }
 
-//local y session storage
 
+/*--------------------------------- COMIENZO DE FUNCIONES PARA GUARDAR/ ACTUALIZAR CARRITO DE COMPRAS EN EL STORAGE------------------------------ */
+
+
+//FUNCION PARA GUARDAR EL ARTICULO DE LOS ARTICULOS AL ARRAY CARRITOCOMPRAS AL STORAGE//
  function guardarLocalStorage(producto){
     carritoCompras= this.obtenerProductoLocasStorage();
     carritoCompras.push(producto);
@@ -126,6 +101,7 @@ function eliminarCarrito1 (prodId){
 
 }
 
+//FUNCION  PARA LEER EL LOCAL STORAGE PARA TENERLO ACTUALIZO EN LA FUNCION ANTERIOR//
 function obtenerProductoLocasStorage(){
     let productosLs;
     localStorage.getItem(`productosCarrito`) === null ? productosLs = [] : productosLs= JSON.parse(localStorage.getItem(`productosCarrito`));
@@ -139,39 +115,38 @@ function guardarLocalStorageProductos(producto){
 
 
 }
-
+//FUNCION PARA VACIAR EL CARRITO DE COMPRAS ///
 function eliminarCarritoCompras(){
     carritoCompras = []
     localStorage.setItem(`productosCarrito`, JSON.stringify(carritoCompras));
     location.reload();
 
     }
-    function restarStock() {
+
+/*-------------------------COMPRAR EL CARRITO-------------------------*/
+
+//FUNCION PARA RESTAR LA CANTIDAD DE CUADROS DEL LOCAL STORAGE// 
+function restarStock() {
         for (producto of carritoCompras){
             let objeto= listaProductos.find((obj) =>    producto.id === obj.id);
             let indice = listaProductos.indexOf(objeto)
-            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precio: parseInt(`${objeto.precio}`), cantidad: parseInt(`${objeto.cantidad -1}`), cantidadPrecio: parseInt(`${objeto.cantidadPrecio}`),  id: parseInt(`${objeto.id}`)})
+            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precioPrincipal: parseInt(`${objeto.precioPrincipal}`), precio: parseInt(`${objeto.precio}`), cantidad: parseInt(`${objeto.cantidad -1}`), cantidadPrecio: parseInt(`${objeto.cantidadPrecio}`),  id: parseInt(`${objeto.id}`)})
             localStorage.setItem(`productos`, JSON.stringify(listaProductos));
             
     }}
-
-    function nuevoPrecio() {
+//FUNCION PARA ATUALIZAR EL PRECIO DEL CUADRO UNA VEZ QUE SE RESTA EL STOCK// 
+function nuevoPrecio() {
         for (producto of carritoCompras){
             let objeto= listaProductos.find((obj) =>    producto.id === obj.id);
             let indice = listaProductos.indexOf(objeto)
             let nuevoPrecio = (((100- ((objeto.cantidad *100) / objeto.cantidadPrecio )) /100) +1 )  *  objeto.precio;
-            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precio: parseInt(`${nuevoPrecio}`), cantidad: parseInt(`${objeto.cantidad}`), cantidadPrecio: parseInt(`${objeto.cantidadPrecio}`),  id: parseInt(`${objeto.id}`)})
+            listaProductos.splice(indice,1, {nombre: `${objeto.nombre}`, precioPrincipal: parseInt(`${objeto.precioPrincipal}`), precio: parseInt(`${nuevoPrecio}`), cantidad: parseInt(`${objeto.cantidad}`), cantidadPrecio: parseInt(`${objeto.cantidadPrecio}`),  id: parseInt(`${objeto.id}`)})
             localStorage.setItem(`productos`, JSON.stringify(listaProductos));
 
     }}
 
     
-
-           
-
-
-  
-
+//FUNCION QUE SE ACTIVA CUANDO APRIETAS EL BOTON COMPRAR// 
    function  comprarCarritoCompras ()
    {
        
@@ -191,7 +166,7 @@ function eliminarCarritoCompras(){
               })}
 
 let th1 = document.getElementById("thread234")
-
+// FUNCION PARA CONVERTIR EL PRECIO TOTAL A USD//
 const totalBitcoin = () => {
     
     fetch("https://api.bluelytics.com.ar/v2/latest")
@@ -199,11 +174,11 @@ const totalBitcoin = () => {
     .then((result) => {
         let resultado =result.blue.value_sell
         th1.innerHTML +=`
-        <td> ${(JSON.parse(localStorage.getItem(`totalCarrito`)) /(resultado.toFixed(2)))}<td/>`
+        <td> ${(JSON.parse(localStorage.getItem(`totalCarrito`)) /(resultado)).toFixed(2)}<td/>`
 
     }
     
     )}
 
-    document.body.onload = totalBitcoin()
     
+    document.body.onload = totalBitcoin()
