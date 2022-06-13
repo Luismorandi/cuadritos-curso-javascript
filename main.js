@@ -132,6 +132,7 @@ const searchFilter = () => {
     }); 
 
   }
+  
   ////si no esta en 0, busca por cada letra escrita el nombre del cuadro en vivo/////
   else{ 
     sectionProductos.innerHTML = `
@@ -141,18 +142,11 @@ const searchFilter = () => {
       let nombre1= producto.nombre.toLowerCase();
       if(nombre1.indexOf(textoBuscador) !== -1){
 
-        sectionProductos.innerHTML = `
-        `
         agregarCard(producto)
 
       }
-
       ///////si lo que escribes no coincide con los nombres de la lista de productos, imprime el H1/////////
-      else {
-        sectionProductos.innerHTML = `
-        <h1 class="sectionProductos1">No se encontro ese cuadro. Intenta con otro nombre :)</h1>
-      `
-      }
+
 
   }
 }
